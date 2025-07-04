@@ -1,7 +1,8 @@
 name: camera_plus
-description: "A camera package"
-version: 0.0.1
-homepage:
+description: "A simple camera wrapper built on top of the camera package"
+version: 0.1.0
+homepage: https://github.com/siquitch/camera_plus
+issue_tracker: https://github.com/siquitch/camera_plus/issues
 
 environment:
   sdk: ^3.8.0
@@ -21,4 +22,5 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-flutter:
+topics:
+  - camera
