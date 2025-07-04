@@ -1,11 +1,11 @@
-A simple, camera wrapper built on top of [`camera`](https://pub.dev/packages/camera)
-Designed for convienient camera setup and control on Android and iOS
+A simple camera wrapper built on top of [`camera`](https://pub.dev/packages/camera).
+Designed for straighforward camera setup and control on Android and iOS.
 
 ---
 
 ## Features
 
-- Simple `CameraManager` for camera setup and control
+- `CameraManager` for camera setup and control
 - Support for switching cameras
 - Picture capture
 - Fully testable via injectable dependencies
@@ -26,9 +26,7 @@ dependencies:
 
 ### 2. Platform setup
 
-#### Follow camera setup instructions for:
-
-##### Android
+#### Android
 
 Add required permissions to android/app/src/main/AndroidManifest.xml:
 
@@ -56,7 +54,7 @@ await manager.init(); // must be called before use
 
 ### Display a preview
 
-#### Build your own widget using the included state, or use the [`CameraView`](https://github.com/siquitch/camera_plus) widget (see [example](https://pub.dev/packages/camera_plus/example)):
+#### Build your own widget using the included state, or use the [`CameraView`](https://github.com/siquitch/camera_plus/blob/master/lib/src/ui/camera_view.dart) widget (see [example](https://pub.dev/packages/camera_plus/example)):
 
 ```dart
 ValueListenableBuilder<CameraState>(
@@ -71,7 +69,7 @@ ValueListenableBuilder<CameraState>(
     }
 
     return AspectRatio(
-      aspectRatio: state.controller!.value.aspectRatio,
+      aspectRatio: 1 / state.controller!.value.aspectRatio,
       child: CameraPreview(state.controller!),
     );
   },
@@ -96,4 +94,4 @@ print('Saved at ${file.path}');
 * Zoom, flash, focus, and exposure controls
 * Video recording
 
-### License
+### [License](https://github.com/siquitch/camera_plus/blob/master/LICENSE)

@@ -12,6 +12,7 @@ class CameraView extends StatefulWidget {
 
   final Future<void> Function(XFile)? onPhotoTaken;
 
+  ///
   const CameraView({
     super.key,
     required this.cameraManager,
@@ -64,7 +65,7 @@ class _CameraViewState extends State<CameraView> {
   }
 }
 
-/// Widget that takes a picture
+/// A generic button that can be used to represent taking a picture
 class CameraButton extends StatefulWidget {
   final VoidCallback onTap;
   final bool isEnabled;
