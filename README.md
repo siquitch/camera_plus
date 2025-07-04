@@ -1,39 +1,99 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+A simple, camera wrapper built on top of [`camera`](https://pub.dev/packages/camera)
+Designed for convienient camera setup and control on Android and iOS
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+---
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Simple `CameraManager` for camera setup and control
+- Support for switching cameras
+- Picture capture
+- Fully testable via injectable dependencies
+- Optional customizable preview widget
 
-## Getting started
+---
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+![Preview](https://github.com/siquitch/camera_plus/example/preview.png)
 
-## Usage
+## Getting Started
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### 1. Add dependency
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  camera_plus: ^0.1.0
 ```
 
-## Additional information
+### 2. Platform setup
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+#### Follow camera setup instructions for:
+
+##### Android
+
+Add required permissions to android/app/src/main/AndroidManifest.xml:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+```
+
+##### iOS
+
+Add usage descriptions to ios/Runner/Info.plist:
+
+```plist
+<key>NSCameraUsageDescription</key>
+<string>We need access to the camera to take photos.</string>
+```
+
+### Usage
+Initialize the manager
+
+``` dart
+final manager = CameraManager();
+
+await manager.init(); // must be called before use
+```
+
+### Display a preview
+
+#### Build your own widget using the included state, or use the [`CameraView`](https://github.com/siquitch/camera_plus) widget (see [example](https://pub.dev/packages/camera_plus/example)):
+
+```dart
+ValueListenableBuilder<CameraState>(
+  valueListenable: manager.state,
+  builder: (context, state, _) {
+    if (state.error != null) {
+      return Text('Camera error: ${state.error}');
+    }
+
+    if (!state.isReady) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return AspectRatio(
+      aspectRatio: state.controller!.value.aspectRatio,
+      child: CameraPreview(state.controller!),
+    );
+  },
+)
+```
+
+#### Switch camera
+
+```dart
+await manager.switchCamera();
+```
+
+#### Capture image
+
+``` dart
+final file = await manager.takePicture();
+print('Saved at ${file.path}');
+```
+
+### Roadmap
+
+* Zoom, flash, focus, and exposure controls
+* Video recording
+
+### License
