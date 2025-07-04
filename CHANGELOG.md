@@ -1,4 +1,4 @@
-## 0.0.1
+## 0.1.0
 
 * Provides a convenient wrapper over the `camera` plugin
 * `CameraManager`: A controller that manages camera initialization, switching, and taking a picture
