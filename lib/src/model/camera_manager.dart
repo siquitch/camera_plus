@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
-import 'package:camera_plus/src/model/camera_state.dart';
 import 'package:flutter/widgets.dart';
+
+import '../../camera_plus.dart';
 
 typedef CameraListProvider = Future<List<CameraDescription>> Function();
 typedef CameraControllerFactory =

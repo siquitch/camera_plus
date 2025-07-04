@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
-import 'package:camera_plus/src/model/camera_manager.dart';
-import 'package:camera_plus/src/model/camera_state.dart';
 import 'package:flutter/material.dart';
+
+import '../../camera_plus.dart';
 
 class CameraView extends StatefulWidget {
   final CameraManager cameraManager;
