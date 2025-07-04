@@ -1,13 +1,13 @@
 import 'package:camera/camera.dart';
 
-class CamraState {
+class CameraState {
   final CameraController? controller;
   final bool isInitialized;
   final CameraDescription? activeCamera;
   final List<CameraDescription> availableCameras;
   final String? error;
 
-  const CamraState._({
+  const CameraState._({
     required this.isInitialized,
     required this.activeCamera,
     required this.availableCameras,
@@ -15,14 +15,14 @@ class CamraState {
     this.error,
   });
 
-  CamraState copyWith({
+  CameraState copyWith({
     CameraController? controller,
     bool? isInitialized,
     CameraDescription? activeCamera,
     List<CameraDescription>? availableCameras,
     String? error,
   }) {
-    return CamraState._(
+    return CameraState._(
       controller: controller ?? this.controller,
       isInitialized: isInitialized ?? this.isInitialized,
       activeCamera: activeCamera ?? this.activeCamera,
@@ -31,7 +31,7 @@ class CamraState {
     );
   }
 
-  factory CamraState.initial() => CamraState._(
+  factory CameraState.initial() => CameraState._(
     controller: null,
     isInitialized: false,
     activeCamera: null,

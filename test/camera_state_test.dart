@@ -1,11 +1,11 @@
-import 'package:camra/model/camra_state.dart';
+import 'package:camera_plus/src/model/camera_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'mocks.mocks.dart';
 
 void main() {
   group('CameraState', () {
     test('initial state has expected defaults', () {
-      final state = CamraState.initial();
+      final state = CameraState.initial();
 
       expect(state.controller, isNull);
       expect(state.isInitialized, isFalse);
@@ -18,7 +18,7 @@ void main() {
     test('copyWith overrides specified values only', () {
       final mockController = MockCameraController();
       final mockCamera = MockCameraDescription();
-      final initialState = CamraState.initial();
+      final initialState = CameraState.initial();
 
       final updated = initialState.copyWith(
         controller: mockController,
@@ -39,7 +39,7 @@ void main() {
       'isReady returns true only when initialized and controller is set',
       () {
         final mockController = MockCameraController();
-        final state = CamraState.initial();
+        final state = CameraState.initial();
 
         expect(state.isReady, isFalse);
 

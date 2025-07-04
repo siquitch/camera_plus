@@ -1,4 +1,4 @@
-import 'package:camra/model/camra_manager.dart';
+import 'package:camera_plus/src/model/camera_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -8,14 +8,14 @@ void main() {
   late MockCameraController mockController;
   late MockCameraDescription camera1;
   late MockCameraDescription camera2;
-  late CamraManager cameraManager;
+  late CameraManager cameraManager;
 
   setUp(() {
     mockController = MockCameraController();
     camera1 = MockCameraDescription();
     camera2 = MockCameraDescription();
 
-    cameraManager = CamraManager.test(
+    cameraManager = CameraManager.test(
       getAvailableCameras: () async => [camera1, camera2],
       createController: (_) => mockController,
     );
@@ -26,7 +26,7 @@ void main() {
     when(camera1.name).thenReturn('0');
     when(camera2.name).thenReturn('1');
 
-    cameraManager = CamraManager.test(
+    cameraManager = CameraManager.test(
       getAvailableCameras: () async => [camera1, camera2],
       createController: (_) => mockController,
     );
@@ -43,7 +43,7 @@ void main() {
     // Arrange
     final mockNextController = MockCameraController();
 
-    cameraManager = CamraManager.test(
+    cameraManager = CameraManager.test(
       getAvailableCameras: () async => [camera1, camera2],
       createController: (camera) {
         if (camera == camera1) return mockController;

@@ -1,26 +1,26 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
-import 'package:camra/model/camra_state.dart';
+import 'package:camera_plus/src/model/camera_state.dart';
 import 'package:flutter/widgets.dart';
 
 typedef CameraListProvider = Future<List<CameraDescription>> Function();
 typedef CameraControllerFactory =
     CameraController Function(CameraDescription camera);
 
-class CamraManager {
-  final ValueNotifier<CamraState> state = ValueNotifier(CamraState.initial());
+class CameraManager {
+  final ValueNotifier<CameraState> state = ValueNotifier(CameraState.initial());
 
   final CameraListProvider getAvailableCameras;
   final CameraControllerFactory createController;
 
-  CamraManager()
+  CameraManager()
     : getAvailableCameras = _defaultCameraListProvider,
       createController = _defaultControllerFactory;
 
   /// Constructor for testing only
   @visibleForTesting
-  CamraManager.test({
+  CameraManager.test({
     required this.getAvailableCameras,
     required this.createController,
   });
@@ -71,7 +71,7 @@ class CamraManager {
   /// Wraps [CameraController.takePicture]
   Future<XFile> takePicture() async {
     if (!state.value.isReady) {
-      throw CamraManagerException('CamraManager not ready');
+      throw CameraManagerException('CameraManager not ready');
     }
     return await state.value.controller!.takePicture();
   }
@@ -82,8 +82,8 @@ class CamraManager {
   }
 }
 
-class CamraManagerException implements Exception {
-  CamraManagerException(this.message);
+class CameraManagerException implements Exception {
+  CameraManagerException(this.message);
 
   final String message;
 

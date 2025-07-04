@@ -1,10 +1,10 @@
 import 'package:camera/camera.dart';
-import 'package:camra/model/camra_manager.dart';
-import 'package:camra/model/camra_state.dart';
+import 'package:camera_plus/src/model/camera_manager.dart';
+import 'package:camera_plus/src/model/camera_state.dart';
 import 'package:flutter/material.dart';
 
-class Camra extends StatefulWidget {
-  final CamraManager cameraManager;
+class CameraView extends StatefulWidget {
+  final CameraManager cameraManager;
 
   final Widget Function(BuildContext)? errorBuilder;
   final Widget Function(BuildContext)? loadingBuilder;
@@ -12,7 +12,7 @@ class Camra extends StatefulWidget {
 
   final Future<void> Function(XFile)? onPhotoTaken;
 
-  const Camra({
+  const CameraView({
     super.key,
     required this.cameraManager,
     this.errorBuilder,
@@ -22,14 +22,14 @@ class Camra extends StatefulWidget {
   });
 
   @override
-  State<Camra> createState() => _CamraState();
+  State<CameraView> createState() => _CameraViewState();
 }
 
-class _CamraState extends State<Camra> {
+class _CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ValueListenableBuilder<CamraState>(
+      child: ValueListenableBuilder<CameraState>(
         valueListenable: widget.cameraManager.state,
         builder: (context, state, _) {
           if (state.error != null) {
@@ -50,11 +50,13 @@ class _CamraState extends State<Camra> {
                 child: CameraPreview(state.controller!),
               ),
               Spacer(),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: widget.bottomBarBuilder?.call(context),
+              Expanded(
+                flex: 2,
+                child:
+                    widget.bottomBarBuilder?.call(context) ??
+                    const SizedBox.shrink(),
               ),
-            ].nonNulls.toList(),
+            ],
           );
         },
       ),
@@ -63,21 +65,21 @@ class _CamraState extends State<Camra> {
 }
 
 /// Widget that takes a picture
-class CamraButton extends StatefulWidget {
+class CameraButton extends StatefulWidget {
   final VoidCallback onTap;
   final bool isEnabled;
 
-  const CamraButton({
+  const CameraButton({
     super.key,
     required this.onTap,
     this.isEnabled = true,
   });
 
   @override
-  State<CamraButton> createState() => _CamraButtonState();
+  State<CameraButton> createState() => _CameraButtonState();
 }
 
-class _CamraButtonState extends State<CamraButton> {
+class _CameraButtonState extends State<CameraButton> {
   bool isTapping = false;
 
   void onTap() {
