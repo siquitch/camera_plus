@@ -1,5 +1,4 @@
-import 'package:camra/model/camra_manager.dart';
-import 'package:camra/ui/camra.dart';
+import 'package:camera_plus/camera_plus.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,21 +15,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Example(),
+      home: const ExampleCamera(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Example extends StatefulWidget {
-  const Example({super.key});
+class ExampleCamera extends StatefulWidget {
+  const ExampleCamera({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
+  State<ExampleCamera> createState() => _ExampleCameraState();
 }
 
-class _ExampleState extends State<Example> {
-  final cameraManager = CamraManager();
+class _ExampleCameraState extends State<ExampleCamera> {
+  final cameraManager = CameraManager();
 
   @override
   void initState() {
@@ -46,14 +45,14 @@ class _ExampleState extends State<Example> {
 
   @override
   Widget build(BuildContext context) {
-    return Camra(
+    return CameraView(
       cameraManager: cameraManager,
       bottomBarBuilder: (context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Spacer(),
           Expanded(
-            child: CamraButton(
+            child: CameraButton(
               onTap: () {},
             ),
           ),
