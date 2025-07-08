@@ -1,60 +1,76 @@
-A simple camera wrapper built on top of [`camera`](https://pub.dev/packages/camera).
-Designed for straighforward camera setup and control on Android and iOS.
+# 📷 camera_plus
+
+[![Pub Version](https://img.shields.io/pub/v/camera_plus?color=blue)](https://pub.dev/packages/camera_plus)
+![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-green)
+[![License](https://img.shields.io/github/license/siquitch/camera_plus)](https://github.com/siquitch/camera_plus/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/siquitch/camera_plus?style=social)](https://github.com/siquitch/camera_plus/stargazers)
+
+> A simple camera wrapper built on top of [`camera`](https://pub.dev/packages/camera).  
+> Designed for straightforward camera setup and control on Android and iOS.
 
 ---
 
-## Features
+## ✨ Features
 
-- `CameraManager` for camera setup and control
-- Support for switching cameras
-- Picture capture
-- Fully testable via injectable dependencies
-- Optional customizable preview widget
+- ✅ `CameraManager` for setup and camera control
+- 🔁 Camera switching (front/back)
+- 📸 Picture capture support
+- 🧪 Fully testable with injectable dependencies
+- 🎨 Optional customizable preview widget
 
 ---
 
-![Preview](https://github.com/siquitch/camera_plus/example/preview.png)
+## 🖼️ Preview
 
-## Getting Started
+![Preview](https://github.com/siquitch/camera_plus/raw/master/example/preview.png)
 
-### 1. Add dependency
+---
+
+## ⚙️ Getting Started
+
+### 1️⃣ Add dependency
 
 ```yaml
 dependencies:
   camera_plus: ^0.1.0
 ```
+# 📷 Camera Integration Guide
 
-### 2. Platform setup
+## 2️⃣ Platform Setup
 
-#### Android
+### 📱 Android
 
-Add required permissions to android/app/src/main/AndroidManifest.xml:
+Add the required permission in `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-##### iOS
+### 🍏 iOS
 
-Add usage descriptions to ios/Runner/Info.plist:
+Add the camera usage description in `ios/Runner/Info.plist`:
 
-```plist
+```xml
 <key>NSCameraUsageDescription</key>
 <string>We need access to the camera to take photos.</string>
 ```
 
-### Usage
-Initialize the manager
+---
 
-``` dart
+## 💡 Usage
+
+### 🔧 Initialize the Camera
+
+```dart
 final manager = CameraManager();
-
-await manager.init(); // must be called before use
+await manager.init(); // Must be called before usage
 ```
 
-### Display a preview
+---
 
-#### Build your own widget using the included state, or use the [`CameraView`](https://github.com/siquitch/camera_plus/blob/master/lib/src/ui/camera_view.dart) widget (see [example](https://pub.dev/packages/camera_plus/example)):
+### 🖼️ Display a Camera Preview
+
+Use the built-in state with your own widget or the prebuilt `CameraView`.
 
 ```dart
 ValueListenableBuilder<CameraState>(
@@ -76,22 +92,34 @@ ValueListenableBuilder<CameraState>(
 )
 ```
 
-#### Switch camera
+---
+
+### 🔁 Switch Camera
 
 ```dart
 await manager.switchCamera();
 ```
 
-#### Capture image
+---
 
-``` dart
+### 📸 Capture Image
+
+```dart
 final file = await manager.takePicture();
 print('Saved at ${file.path}');
 ```
 
-### Roadmap
+---
 
-* Zoom, flash, focus, and exposure controls
-* Video recording
+## 🛣️ Roadmap
 
-### [License](https://github.com/siquitch/camera_plus/blob/master/LICENSE)
+- 🔍 Zoom control  
+- ⚡ Flash toggle  
+- 🎥 Video recording  
+- 🎯 Manual focus & exposure  
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
